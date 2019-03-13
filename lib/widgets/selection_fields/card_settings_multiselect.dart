@@ -16,7 +16,7 @@ class CardSettingsMultiselect extends FormField<List<String>> {
     Icon icon,
     Widget requiredIndicator,
     List<String> options,
-    bool autovalidate: false,
+    bool autoValidate: false,
     bool visible: true,
     FormFieldSetter<List<String>> onSaved,
     FormFieldValidator<List<String>> validator,
@@ -26,9 +26,10 @@ class CardSettingsMultiselect extends FormField<List<String>> {
             initialValue: initialValues,
             onSaved: onSaved,
             validator: validator,
-            autovalidate: autovalidate,
+            autovalidate: autoValidate,
             builder: (FormFieldState<List<String>> field) {
-              final _CardSettingsMultiselectState state = field;
+              final _CardSettingsMultiselectState state =
+                  field as _CardSettingsMultiselectState;
               return GestureDetector(
                 onTap: () {
                   state._showDialog(label, options);
@@ -45,7 +46,7 @@ class CardSettingsMultiselect extends FormField<List<String>> {
                     alignment: WrapAlignment.start,
                     spacing: 4.0,
                     runSpacing: 0.0,
-                    children: state.value
+                    children: field.value
                         .map(
                           (s) => Chip(label: Text(s)),
                         )

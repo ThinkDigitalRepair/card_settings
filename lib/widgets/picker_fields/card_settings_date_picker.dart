@@ -27,7 +27,8 @@ class CardSettingsDatePicker extends FormField<DateTime> {
             validator: validator,
             autovalidate: autovalidate,
             builder: (FormFieldState<DateTime> field) {
-              final _CardSettingsDatePickerState state = field;
+              final _CardSettingsDatePickerState state =
+                  field as _CardSettingsDatePickerState;
               return GestureDetector(
                 onTap: () {
                   state._showDialog();

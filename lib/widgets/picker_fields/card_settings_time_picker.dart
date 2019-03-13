@@ -26,7 +26,8 @@ class CardSettingsTimePicker extends FormField<TimeOfDay> {
             validator: validator,
             autovalidate: autovalidate,
             builder: (FormFieldState<TimeOfDay> field) {
-              final _CardSettingsTimePickerState state = field;
+              final _CardSettingsTimePickerState state =
+                  field as _CardSettingsTimePickerState;
               return GestureDetector(
                 onTap: () {
                   state._showDialog();

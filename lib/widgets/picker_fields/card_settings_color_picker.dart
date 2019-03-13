@@ -35,7 +35,8 @@ class CardSettingsColorPicker extends FormField<Color> {
             validator: validator,
             autovalidate: autovalidate,
             builder: (FormFieldState<Color> field) {
-              final _CardSettingsColorPickerState state = field;
+              final _CardSettingsColorPickerState state =
+                  field as _CardSettingsColorPickerState;
               return GestureDetector(
                 onTap: () {
                   state._showDialog("Color for " + label);

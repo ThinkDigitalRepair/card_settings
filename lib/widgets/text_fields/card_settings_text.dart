@@ -58,7 +58,8 @@ class CardSettingsText extends FormField<String> {
           validator: validator,
           autovalidate: autovalidate,
           builder: (FormFieldState<String> field) {
-            final _CardSettingsTextState state = field;
+            final _CardSettingsTextState state =
+                field as _CardSettingsTextState;
             return CardSettingsField(
               label: label,
               labelAlign: labelAlign,

@@ -6,10 +6,6 @@ import 'package:flutter/rendering.dart';
 
 /// This helper widget manages a scrollable checkbox list inside a picker widget.
 class CheckboxPicker extends StatefulWidget {
-  static const double defaultItemHeight = 40.0;
-  static const double defaultListviewWidth = 100.0;
-  static const int defaultNumberOfVisibleItems = 10;
-
   ///constructor for integer number picker
   CheckboxPicker(
       {Key key,
@@ -17,11 +13,15 @@ class CheckboxPicker extends StatefulWidget {
       @required this.initialValues,
       @required this.onChanged,
       this.itemHeight = defaultItemHeight,
-      this.listViewWidth = defaultListviewWidth,
+      this.listViewWidth = defaultListViewWidth,
       this.numberOfVisibleItems = defaultNumberOfVisibleItems})
       : assert(items != null),
         listViewHeight = numberOfVisibleItems * itemHeight,
         super(key: key);
+
+  static const double defaultItemHeight = 40.0;
+  static const double defaultListViewWidth = 100.0;
+  static const int defaultNumberOfVisibleItems = 10;
 
   // Events
   final ValueChanged<List<String>> onChanged;

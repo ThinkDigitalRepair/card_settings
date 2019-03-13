@@ -28,10 +28,11 @@ class CardSettingsListPicker extends FormField<String> {
             validator: validator,
             autovalidate: autovalidate,
             builder: (FormFieldState<String> field) {
-              final _CardSettingsListPickerState state = field;
+              final _CardSettingsListPickerState state =
+                  field as _CardSettingsListPickerState;
               return GestureDetector(
                 onTap: () {
-                  FocusScope.of(field.context).requestFocus(new FocusNode());
+                  FocusScope.of(field.context).requestFocus(FocusNode());
                   state._showDialog(label, options);
                 },
                 child: CardSettingsField(

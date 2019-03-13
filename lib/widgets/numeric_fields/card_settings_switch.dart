@@ -8,8 +8,8 @@ import '../../card_settings.dart';
 class CardSettingsSwitch extends FormField<bool> {
   CardSettingsSwitch({
     Key key,
-    String label: 'Label',
-    double labelWidth= 120.0,
+    String label = '',
+    double labelWidth = 120.0,
     TextAlign labelAlign,
     TextAlign contentAlign,
     Icon icon,
@@ -17,20 +17,23 @@ class CardSettingsSwitch extends FormField<bool> {
     String trueLabel: 'Yes',
     String falseLabel: 'No',
     bool initialValue: false,
-    bool autovalidate: false,
+    bool autoValidate: false,
     bool visible: true,
     FormFieldSetter<bool> onSaved,
     FormFieldValidator<bool> validator,
     ValueChanged<bool> onChanged,
+    bool hideUnderline = true,
   }) : super(
             key: key,
             initialValue: initialValue,
             onSaved: onSaved,
             validator: validator,
-            autovalidate: autovalidate,
+            autovalidate: autoValidate,
             builder: (FormFieldState<bool> field) {
-              final _CardSettingsSwitchState state = field;
+              final _CardSettingsSwitchState state =
+                  field as _CardSettingsSwitchState;
               return CardSettingsField(
+                type: CardSettingsType.settingsSwitch,
                 label: label,
                 labelWidth: labelWidth,
                 labelAlign: labelAlign,
@@ -42,7 +45,7 @@ class CardSettingsSwitch extends FormField<bool> {
                   Expanded(
                     child: Text(
                       state.value ? trueLabel : falseLabel,
-                      style: Theme.of(field.context).textTheme.subhead,
+//                      style: Theme.of(field.context).textTheme.subhead.copyWith(),
                       textAlign: contentAlign ??
                           CardSettings.of(field.context).contentAlign,
                     ),

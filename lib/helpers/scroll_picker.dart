@@ -6,10 +6,6 @@ import 'package:flutter/rendering.dart';
 
 /// This helper widget manages the scrollable content inside a picker widget.
 class ScrollPicker extends StatelessWidget {
-  static const double defaultItemHeight = 50.0;
-  static const int defaultNumberOfVisibleItems = 7;
-
-  ///constructor for integer number picker
   ScrollPicker(
       {Key key,
       @required this.items,
@@ -18,14 +14,22 @@ class ScrollPicker extends StatelessWidget {
       this.itemHeight = defaultItemHeight,
       this.numberOfVisibleItems = defaultNumberOfVisibleItems})
       : assert(items != null),
-        assert(numberOfVisibleItems % 2 != 0), // must be odd number
+        assert(numberOfVisibleItems % 2 != 0),
+        // must be odd number
         selectedValue = initialValue,
         numberOfPaddingRows = ((numberOfVisibleItems - 1) ~/ 2),
         scrollController = ScrollController(
-          initialScrollOffset: items.contains(initialValue) ? items.indexOf(initialValue) * itemHeight : 0.0,
+          initialScrollOffset: items.contains(initialValue)
+              ? items.indexOf(initialValue) * itemHeight
+              : 0.0,
         ),
         listViewHeight = numberOfVisibleItems * itemHeight,
         super(key: key);
+
+  static const double defaultItemHeight = 50.0;
+  static const int defaultNumberOfVisibleItems = 7;
+
+  ///constructor for integer number picker
 
   // Events
   final ValueChanged<String> onChanged;

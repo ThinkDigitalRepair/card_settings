@@ -4,11 +4,13 @@
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter/material.dart';
 
+enum CardSettingsType { settingsSwitch }
+
 /// This is the basic layout of a field in a CardSettings view. Typically, it
 /// will not be used directly.
 class CardSettingsField extends StatelessWidget {
   CardSettingsField({
-    this.label: 'Label',
+    this.label = '',
     this.content,
     this.icon,
     this.pickerIcon,
@@ -19,6 +21,7 @@ class CardSettingsField extends StatelessWidget {
     this.visible: true,
     this.labelAlign,
     this.requiredIndicator,
+    this.type,
   });
 
   final String label;
@@ -32,16 +35,12 @@ class CardSettingsField extends StatelessWidget {
   final TextAlign labelAlign;
   final Icon icon;
   final Widget requiredIndicator;
+  final CardSettingsType type;
 
   @override
   Widget build(BuildContext context) {
     return (visible)
         ? Container(
-            decoration: BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(
-                      width: 1.0, color: Theme.of(context).dividerColor)),
-            ),
             padding: EdgeInsets.all(14.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +48,9 @@ class CardSettingsField extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    _buildLabelRow(context),
+                    this.type == CardSettingsType.settingsSwitch
+                        ? Expanded(child: _buildLabelRow(context))
+                        : _buildLabelRow(context),
                     _buildInlineContent(context),
                     _buildRightDecoration()
                   ],
@@ -63,7 +64,9 @@ class CardSettingsField extends StatelessWidget {
 
   Widget _buildInlineContent(BuildContext context) {
     var decoratedContent = content;
-    if (content is TextField || content is TextFormField) {
+    if (content is TextField ||
+        content is TextFormField ||
+        type == CardSettingsType.settingsSwitch) {
       // do nothing, these already have built in InputDecorations
     } else {
       // wrap in a decorator to show validation errors
@@ -71,8 +74,8 @@ class CardSettingsField extends StatelessWidget {
           .applyDefaults(Theme.of(context).inputDecorationTheme)
           .copyWith(
               errorText: errorText,
-              contentPadding: EdgeInsets.all(0.0),
-              border: InputBorder.none);
+              contentPadding: EdgeInsets.only(bottom: 3),
+              border: UnderlineInputBorder());
 
       decoratedContent = InputDecorator(decoration: decoration, child: content);
     }
@@ -98,7 +101,7 @@ class CardSettingsField extends StatelessWidget {
         children: <Widget>[
           _buildLeftIcon(context),
           _buildLabelSpacer(context),
-          _buildLabel(context),
+          Expanded(flex: 2, child: _buildLabel(context)),
           _buildRequiredIndicator(context),
           _buildLabelSuffix(context),
         ],
@@ -149,7 +152,7 @@ class CardSettingsField extends StatelessWidget {
 
   TextStyle _buildLabelStyle(BuildContext context) {
     TextStyle labelStyle = TextStyle(
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.normal,
       fontSize: 16.0,
     );
 
