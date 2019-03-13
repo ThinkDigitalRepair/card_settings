@@ -149,7 +149,7 @@ class CardSettingsField extends StatelessWidget {
 
   TextStyle _buildLabelStyle(BuildContext context) {
     TextStyle labelStyle = TextStyle(
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.normal,
       fontSize: 16.0,
     );
 
