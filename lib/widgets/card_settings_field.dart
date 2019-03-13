@@ -37,22 +37,27 @@ class CardSettingsField extends StatelessWidget {
   Widget build(BuildContext context) {
     return (visible)
         ? Container(
-      padding: EdgeInsets.all(14.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _buildLabelRow(context),
-              _buildInlineContent(context),
-              _buildRightDecoration()
-            ],
-          ),
-          _buildRowContent()
-        ],
-      ),
-    )
+            decoration: BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(
+                      width: 1.0, color: Theme.of(context).dividerColor)),
+            ),
+            padding: EdgeInsets.all(14.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    _buildLabelRow(context),
+                    _buildInlineContent(context),
+                    _buildRightDecoration()
+                  ],
+                ),
+                _buildRowContent()
+              ],
+            ),
+          )
         : Container();
   }
 
@@ -65,9 +70,9 @@ class CardSettingsField extends StatelessWidget {
       final InputDecoration decoration = const InputDecoration()
           .applyDefaults(Theme.of(context).inputDecorationTheme)
           .copyWith(
-          errorText: errorText,
-          contentPadding: EdgeInsets.only(bottom: 3),
-          border: UnderlineInputBorder());
+              errorText: errorText,
+              contentPadding: EdgeInsets.all(0.0),
+              border: InputBorder.none);
 
       decoratedContent = InputDecorator(decoration: decoration, child: content);
     }
@@ -78,9 +83,9 @@ class CardSettingsField extends StatelessWidget {
   Widget _buildRowContent() {
     return (contentOnNewLine)
         ? Container(
-      padding: EdgeInsets.only(top: 10.0),
-      child: content,
-    )
+            padding: EdgeInsets.only(top: 10.0),
+            child: content,
+          )
         : Container();
   }
 
@@ -88,7 +93,7 @@ class CardSettingsField extends StatelessWidget {
     return Container(
       width: (contentOnNewLine) ? null : labelWidth,
       padding:
-      EdgeInsets.only(right: CardSettings.of(context).labelPadding ?? 6.0),
+          EdgeInsets.only(right: CardSettings.of(context).labelPadding ?? 6.0),
       child: Row(
         children: <Widget>[
           _buildLeftIcon(context),
@@ -110,9 +115,9 @@ class CardSettingsField extends StatelessWidget {
 
   Widget _buildLabelSpacer(BuildContext context) {
     return ((labelAlign ??
-        CardSettings.of(context).labelAlign ??
-        TextAlign.left) ==
-        TextAlign.right)
+                CardSettings.of(context).labelAlign ??
+                TextAlign.left) ==
+            TextAlign.right)
         ? Expanded(child: Container())
         : Container();
   }
@@ -144,7 +149,7 @@ class CardSettingsField extends StatelessWidget {
 
   TextStyle _buildLabelStyle(BuildContext context) {
     TextStyle labelStyle = TextStyle(
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.bold,
       fontSize: 16.0,
     );
 
@@ -155,26 +160,26 @@ class CardSettingsField extends StatelessWidget {
     return (icon == null)
         ? Container()
         : Container(
-      margin: EdgeInsets.all(0.0),
-      padding: EdgeInsets.only(right: 4.0),
-      child: Icon(
-        icon.icon,
-        color: Theme.of(context).inputDecorationTheme.labelStyle.color,
-      ),
-    );
+            margin: EdgeInsets.all(0.0),
+            padding: EdgeInsets.only(right: 4.0),
+            child: Icon(
+              icon.icon,
+              color: Theme.of(context).inputDecorationTheme.labelStyle.color,
+            ),
+          );
   }
 
   Widget _buildRightDecoration() {
     return (pickerIcon != null || unitLabel != null)
         ? Container(
-      alignment: Alignment.centerRight,
-      child: (pickerIcon != null)
-          ? Icon(pickerIcon)
-          : Text(
-        unitLabel,
-        style: TextStyle(fontStyle: FontStyle.italic),
-      ),
-    )
+            alignment: Alignment.centerRight,
+            child: (pickerIcon != null)
+                ? Icon(pickerIcon)
+                : Text(
+                    unitLabel,
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+          )
         : Container();
   }
 }
