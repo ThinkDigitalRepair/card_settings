@@ -14,17 +14,28 @@ class CardSettings extends InheritedWidget {
     this.padding: 12.0,
     this.cardElevation: 5.0,
     this.children,
+    this.shouldUseScroll: true,
   }) : super(
           key: key,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.all(padding),
-            child: Card(
-              elevation: cardElevation,
-              child: Column(
-                children: children,
-              ),
-            ),
-          ),
+          child: shouldUseScroll
+              ? SingleChildScrollView(
+                  padding: EdgeInsets.all(padding),
+                  child: Card(
+                    elevation: cardElevation,
+                    child: Column(
+                      children: children,
+                    ),
+                  ),
+                )
+              : Padding(
+                  padding: EdgeInsets.all(padding),
+                  child: Card(
+                    elevation: cardElevation,
+                    child: Column(
+                      children: children,
+                    ),
+                  ),
+                ),
         );
 
   final List<Widget> children;
@@ -34,6 +45,7 @@ class CardSettings extends InheritedWidget {
   final TextAlign contentAlign;
   final double padding;
   final double cardElevation;
+  final bool shouldUseScroll;
 
   static CardSettings of(BuildContext context) {
     return context.inheritFromWidgetOfExactType(CardSettings) as CardSettings;
