@@ -2,7 +2,6 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-
 import '../../card_settings.dart';
 
 /// This is a field that allows a boolean to be set via a switch widget.
@@ -42,13 +41,11 @@ class CardSettingsSwitch extends FormField<bool> {
                 icon: icon,
                 requiredIndicator: requiredIndicator,
                 errorText: field.errorText,
-                onTap: () {
-                  _onChanged(state, !state.value, onChanged);
-                },
                 content: Row(children: <Widget>[
                   Expanded(
                     child: Text(
                       state.value ? trueLabel : falseLabel,
+//                      style: Theme.of(field.context).textTheme.subhead.copyWith(),
                       textAlign: contentAlign ??
                           CardSettings.of(field.context).contentAlign,
                     ),
@@ -60,7 +57,8 @@ class CardSettingsSwitch extends FormField<bool> {
                       child: Switch(
                         value: state.value,
                         onChanged: (value) {
-                          _onChanged(state, value, onChanged);
+                          state.didChange(value);
+                          if (onChanged != null) onChanged(value);
                         },
                       ),
                     ),
@@ -68,12 +66,6 @@ class CardSettingsSwitch extends FormField<bool> {
                 ]),
               );
             });
-
-  static void _onChanged(_CardSettingsSwitchState state, bool value,
-      ValueChanged<bool> onChanged) {
-    state.didChange(value);
-    if (onChanged != null) onChanged(value);
-  }
 
   @override
   _CardSettingsSwitchState createState() => _CardSettingsSwitchState();

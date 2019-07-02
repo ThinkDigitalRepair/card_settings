@@ -9,20 +9,20 @@ enum CardSettingsType { settingsSwitch }
 /// This is the basic layout of a field in a CardSettings view. Typically, it
 /// will not be used directly.
 class CardSettingsField extends StatelessWidget {
-  CardSettingsField(
-      {this.label = '',
-      this.content,
-      this.icon,
-      this.pickerIcon,
-      this.labelWidth = 120.0,
-      this.contentOnNewLine = false,
-      this.unitLabel,
-      this.errorText,
-      this.visible: true,
-      this.labelAlign,
-      this.requiredIndicator,
-      this.type,
-      this.onTap});
+  CardSettingsField({
+    this.label = '',
+    this.content,
+    this.icon,
+    this.pickerIcon,
+    this.labelWidth = 120.0,
+    this.contentOnNewLine = false,
+    this.unitLabel,
+    this.errorText,
+    this.visible: true,
+    this.labelAlign,
+    this.requiredIndicator,
+    this.type,
+  });
 
   final String label;
   final String unitLabel;
@@ -36,7 +36,6 @@ class CardSettingsField extends StatelessWidget {
   final Icon icon;
   final Widget requiredIndicator;
   final CardSettingsType type;
-  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -46,18 +45,15 @@ class CardSettingsField extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                GestureDetector(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      this.type == CardSettingsType.settingsSwitch
-                          ? Expanded(child: _buildLabelRow(context))
-                          : _buildLabelRow(context),
-                      _buildInlineContent(context),
-                      _buildRightDecoration()
-                    ],
-                  ),
-                  onTap: onTap,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    this.type == CardSettingsType.settingsSwitch
+                        ? Expanded(child: _buildLabelRow(context))
+                        : _buildLabelRow(context),
+                    _buildInlineContent(context),
+                    _buildRightDecoration()
+                  ],
                 ),
                 _buildRowContent()
               ],
