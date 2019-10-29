@@ -1,5 +1,8 @@
 # Releases
 
+## [1.2.1] - 10/29/2019
+* Remove intl version constraints for compatibility.
+
 ## [1.2.0] - 9/8/2018
 
 * Fixed overflow bug with picker dialogs on smaller screens
